@@ -23,8 +23,8 @@ if os.path.exists("mean_5_10_20"):
 os.makedirs("mean_5_10_20")  # make new mean_5_10_20 folder
 
 # 获取20210430这一天的数据并保存到stock.xlsx文件中,主要为了利用它的股票代码为下一步下载全部股票数据做准备。
-#若今天是非交易日，则将此日期设为最近的交易日日期。并将下一行date代码注释，按ctrl + / 键。
-# date="20210430"
+#若今天是非交易日，则将此日期设为最近一天的交易日日期。并将下一行date代码注释，按ctrl + / 键。
+# date="20210629"
 
 #若今天是交易日。则将上一行date代码注释，按ctrl + / 键 。
 date=time.strftime("%Y%m%d")
@@ -40,7 +40,7 @@ stock_codes=df['ts_code']
 i=0
 for stock_code in stock_codes:
 
-    df = ts.pro_bar(ts_code=stock_code ,start_date='20200105', end_date=date, ma=[5, 10, 20,30,60,120,250],factors=['tor', 'vr'])
+    df = ts.pro_bar(ts_code=stock_code ,start_date='20201001', end_date=date, ma=[3,5, 10,20,30,60,120,250],factors=['tor', 'vr'])
     #保存到mean_5_10_20文件夹，并以相应股票代码命名
     df.to_excel('./mean_5_10_20/'+ stock_code +'.xlsx','encoding=utf-8')
     i+=1
